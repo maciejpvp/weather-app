@@ -1,3 +1,4 @@
+import { LoaderSpinner } from "./LoaderSpinner";
 import { WeatherCard } from "./WeatherCard";
 import useGeo from "./useGeo";
 import { useWeather } from "./useWeather";
@@ -28,11 +29,11 @@ const App = () => {
     lat,
     lng,
   });
-  if (isLoadingWeather || isLoadingGeo || !weather) return <p>Loading...</p>;
+  const isLoading = isLoadingGeo || isLoadingWeather;
   return (
     <Container>
       <GlobalStyle />
-      <WeatherCard {...weather} />
+      {isLoading && !weather ? <LoaderSpinner /> : <WeatherCard {...weather} />}
     </Container>
   );
 };
